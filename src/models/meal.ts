@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 import { GetWeekMealResponse, MealSource } from "../fetches";
 
 type Slot = "아침" | "점심" | "저녁";
@@ -59,6 +61,10 @@ const slot = (value: MealSource["mealCd"]): Slot => {
   }
 };
 
+const mealedAt = (value: MealSource["mealDt"]): string => {
+  return dayjs(value).format("YYYY-MM-DD");
+};
+
 export const generateMeals = (data: GetWeekMealResponse["data"]): Meal[] => {
   return Object.entries(data)
     .flatMap(([, values]) => Object.values(values).flat())
@@ -77,7 +83,7 @@ export const generateMeals = (data: GetWeekMealResponse["data"]): Meal[] => {
         salt: data.salt,
         thumbnailUrl: data.thumbnailUrl,
         rating: data.rating,
-        mealedAt: data.mealDt,
+        mealedAt: mealedAt(data.mealDt),
       }),
     );
 };
