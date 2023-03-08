@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "prestart": "yarn build",
-    "start": "node dist/main.js"
+    "start": "cloud"
   },
+  "main": "src/main.ts",
   "devDependencies": {
     "@rollup/plugin-alias": "^4.0.3",
+    "@serverless/cloud": "^2.10.13",
     "@types/node": "^18.14.6",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
@@ -26,5 +26,9 @@
     "vite": "^4.1.4",
     "vite-plugin-eslint": "^1.7.0"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "serverless": {
+    "app": "fresh-meal",
+    "org": "say8425"
+  }
 }
