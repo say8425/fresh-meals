@@ -314,20 +314,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-alias@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@rollup/plugin-alias@npm:4.0.3"
-  dependencies:
-    slash: ^4.0.0
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 3efabf35bfe2a40722609397328513dcb72ed4e2d1e35082cd1c60b231af9041214285b3e74d8702e0f00e214ee5ef3022fbc442a1beb8d1b641e85cf2b10cbf
-  languageName: node
-  linkType: hard
-
 "@rollup/pluginutils@npm:^4.2.1":
   version: 4.2.1
   resolution: "@rollup/pluginutils@npm:4.2.1"
@@ -1612,7 +1598,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fresh-meals@workspace:."
   dependencies:
-    "@rollup/plugin-alias": ^4.0.3
     "@serverless/cloud": ^2.10.13
     "@types/node": ^18.14.6
     "@typescript-eslint/eslint-plugin": ^5.54.1
