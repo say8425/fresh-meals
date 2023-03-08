@@ -30,5 +30,8 @@
   "serverless": {
     "app": "fresh-meal",
     "org": "say8425"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.7"
   }
 }
