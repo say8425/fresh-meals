@@ -1,5 +1,7 @@
-import { getWeekMeal } from "./fetches";
-import { generateMeals } from "./models";
+import { schedule } from "@serverless/cloud";
 
-const data = await getWeekMeal();
-generateMeals(data);
+import { storeMeals } from "./services";
+
+schedule.every("1 hour", async () => {
+  await storeMeals();
+});
