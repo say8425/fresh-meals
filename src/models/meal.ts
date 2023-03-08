@@ -1,9 +1,11 @@
-import { GetWeekMealResponse } from "../fetches";
+import { GetWeekMealResponse, MealSource } from "../fetches";
 
-type Corner = "TAKE OUT" | "스페셜" | "백반";
-type Meal = {
-  mealIdx: number;
-  mbrMealIdx: number;
+type Slot = "아침" | "점심" | "저녁";
+type Corner = "TAKE OUT" | "스페셜" | "백반" | "";
+export type Meal = {
+  id: number;
+  corner: Corner;
+  slot: Slot;
   main: string;
   sides: string[];
   kcal: number;
@@ -12,42 +14,70 @@ type Meal = {
   fat: number;
   salt: number;
   thumbnailUrl: string;
-  corner: Corner;
   rating: number;
-  logged: boolean;
-  loggedAll: boolean;
-  mealDt: string;
-  status: number;
-  mealCd: string;
-  moHour: string;
-  tuHour: string;
-  weHour: string;
-  thHour: string;
-  frHour: string;
-  saHour: string;
-  suHour: string;
-  moMinute: string;
-  tuMinute: string;
-  weMinute: string;
-  thMinute: string;
-  frMinute: string;
-  saMinute: string;
-  suMinute: string;
-  caloriesYn: string;
+  mealedAt: string;
+};
+
+const sides = (value: MealSource["side"]): string[] => {
+  return value
+    .split(", ")
+    .filter(Boolean)
+    .filter((value) => value !== "+사이드");
+};
+
+const corner = (value: MealSource["corner"]): Corner => {
+  switch (value) {
+    case "TAKE OUT": {
+      return "TAKE OUT";
+    }
+    case "스페셜": {
+      return "스페셜";
+    }
+    case "백반": {
+      return "백반";
+    }
+    default: {
+      return "";
+    }
+  }
+};
+
+const slot = (value: MealSource["mealCd"]): Slot => {
+  switch (value) {
+    case "1": {
+      return "아침";
+    }
+    case "2": {
+      return "점심";
+    }
+    case "3": {
+      return "저녁";
+    }
+    default: {
+      return "점심";
+    }
+  }
 };
 
 export const generateMeals = (data: GetWeekMealResponse["data"]): Meal[] => {
   return Object.entries(data)
     .flatMap(([, values]) => Object.values(values).flat())
     .filter(Boolean)
-    .map((data) => {
-      const { name, side, ...rest } = data;
-      const main = name;
-      const sides = side.split(", ");
-      return {
-        ...rest,
-        main,
-        sides,
-      } as Meal;
-    });
+    .map(
+      (data): Meal => ({
+        id: data.mealIdx,
+        corner: corner(data.corner),
+        slot: slot(data.mealCd),
+        main: data.name,
+        sides: sides(data.side),
+        kcal: data.kcal,
+        carb: data.carb,
+        protein: data.protein,
+        fat: data.fat,
+        salt: data.salt,
+        thumbnailUrl: data.thumbnailUrl,
+        rating: data.rating,
+        mealedAt: data.mealDt,
+      }),
+    );
 };

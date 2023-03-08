@@ -1,4 +1,4 @@
-type Meal = {
+export type MealSource = {
   mealIdx: number;
   mbrMealIdx: number;
   name: string;
@@ -32,7 +32,7 @@ type Meal = {
   suMinute: string;
   caloriesYn: string;
 };
-type Meals = Record<number, Meal[] | []>;
+type Meals = Record<number, MealSource[] | []>;
 type GetWeekMealResponseData = {
   tu: Meals;
   mo: Meals;
