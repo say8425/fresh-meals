@@ -1,3 +1,5 @@
+import { params } from "@serverless/cloud";
+
 export type MealSource = {
   mealIdx: number;
   mbrMealIdx: number;
@@ -50,9 +52,10 @@ export type GetWeekMealResponse = {
   data: GetWeekMealResponseData;
 };
 export const getWeekMeal = async (): Promise<GetWeekMealResponseData> => {
+  const { storeIdx } = params;
   const url = new URL("https://front.cjfreshmeal.co.kr/meal/v1/week-meal");
   url.search = new URLSearchParams({
-    storeIdx: "6505",
+    storeIdx,
     weekType: "1",
   }).toString();
   const response = await fetch(url, {
