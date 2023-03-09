@@ -61,7 +61,7 @@ const slot = (value: MealSource["mealCd"]): Slot => {
   }
 };
 
-const mealedAt = (value: MealSource["mealDt"]): string => {
+export const mealedAt = (value: string | Date): string => {
   return dayjs(value).format("YYYY-MM-DD");
 };
 
