@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 
 import { GetWeekMealResponse, MealSource } from "../fetches";
 
-type Slot = "아침" | "점심" | "저녁";
-type Corner = "TAKE OUT" | "스페셜" | "백반" | "";
+export type Slot = "아침" | "점심" | "저녁";
+export type Corner = "TAKE OUT" | "스페셜" | "백반" | "";
 export type Meal = {
   id: number;
   corner: Corner;
