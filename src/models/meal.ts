@@ -61,7 +61,7 @@ const slot = (value: MealSource["mealCd"]): Slot => {
   }
 };
 
-export const mealedAt = (value: string | Date): string => {
+export const formatMealedAt = (value: string | Date | dayjs.Dayjs): string => {
   return dayjs(value).format("YYYY-MM-DD");
 };
 
@@ -83,7 +83,7 @@ export const generateMeals = (data: GetWeekMealResponse["data"]): Meal[] => {
         salt: data.salt,
         thumbnailUrl: data.thumbnailUrl,
         rating: data.rating,
-        mealedAt: mealedAt(data.mealDt),
+        mealedAt: formatMealedAt(data.mealDt),
       }),
     );
 };

@@ -1,13 +1,13 @@
 import { data } from "@serverless/cloud";
 
-import { Corner, Meal, Slot } from "../models";
+import { Corner, formatMealedAt, Meal, Slot } from "../models";
 
 const mealKey = (
-  mealedAt: string,
+  mealedAt: string | Date,
   slot: Slot | "*",
   corner: Corner | "*",
 ): string => {
-  return `meal:${mealedAt}:${slot}:${corner}`;
+  return `meal:${formatMealedAt(mealedAt)}:${slot}:${corner}`;
 };
 
 export const createMeal = async (meal: Meal) => {
