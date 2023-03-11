@@ -52,11 +52,11 @@ export type GetWeekMealResponse = {
   data: GetWeekMealResponseData;
 };
 export const getWeekMeal = async (): Promise<GetWeekMealResponseData> => {
-  const { storeIdx } = params;
+  const { storeIdx, weekType } = params;
   const url = new URL("https://front.cjfreshmeal.co.kr/meal/v1/week-meal");
   url.search = new URLSearchParams({
     storeIdx,
-    weekType: "1",
+    weekType,
   }).toString();
   const response = await fetch(url, {
     method: "GET",
